@@ -21,6 +21,8 @@ import com.omp48531.sparchive.screens.NoteDetailScreen
 import com.omp48531.sparchive.ui.theme.SparchiveTheme
 import com.omp48531.sparchive.viewmodel.NotesViewModel
 
+import  com.omp48531.sparchive.screens.LoginScreen
+
 
 
 
@@ -36,7 +38,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
-            NavHost(navController, startDestination = "list_screen",
+            NavHost(navController, startDestination = "login_screen",
 
                 builder = {
                 composable("list_screen") {
@@ -47,6 +49,12 @@ class MainActivity : ComponentActivity() {
 
 
         }
+
+                    composable("login_screen") {
+                       LoginScreen()
+
+
+                    }
 
                 composable("detail_screen/{noteId}") { backStackEntry ->
                     val noteId = backStackEntry.arguments?.getString("noteId")?.toIntOrNull()
