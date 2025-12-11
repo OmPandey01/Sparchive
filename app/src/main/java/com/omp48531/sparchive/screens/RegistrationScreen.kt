@@ -1,10 +1,8 @@
 package com.omp48531.sparchive.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,11 +33,11 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(onBack: () -> Unit, onRegister: () -> Unit) {
+fun RegistrationScreen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Login") },
+                title = { Text("Register") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
@@ -61,7 +59,7 @@ fun LoginScreen(onBack: () -> Unit, onRegister: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Login",
+                text = "Create Account",
                 fontSize = 32.sp,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -73,7 +71,7 @@ fun LoginScreen(onBack: () -> Unit, onRegister: () -> Unit) {
                 value = username,
                 onValueChange = { username = it },
                 label = { Text("Username") },
-                placeholder = { Text("Enter your username") },
+                placeholder = { Text("Choose a username") },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -84,7 +82,19 @@ fun LoginScreen(onBack: () -> Unit, onRegister: () -> Unit) {
                 value = password,
                 onValueChange = { password = it },
                 label = { Text("Password") },
-                placeholder = { Text("Enter your password") },
+                placeholder = { Text("Create a password") },
+                visualTransformation = PasswordVisualTransformation(),
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            var confirmPassword by remember { mutableStateOf("") }
+            OutlinedTextField(
+                value = confirmPassword,
+                onValueChange = { confirmPassword = it },
+                label = { Text("Confirm Password") },
+                placeholder = { Text("Confirm your password") },
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.fillMaxWidth()
             )
@@ -92,21 +102,10 @@ fun LoginScreen(onBack: () -> Unit, onRegister: () -> Unit) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = { /* TODO: Handle login logic here */ },
+                onClick = { /* TODO: Handle registration logic here */ },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = "Login")
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Row {
-                Text(text = "Don't have an account? ")
-                Text(
-                    text = "Register",
-                    modifier = Modifier.clickable { onRegister() },
-                    color = MaterialTheme.colorScheme.primary
-                )
+                Text(text = "Register")
             }
         }
     }
