@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -20,13 +22,19 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.painter.BrushPainter
 import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import com.omp48531.sparchive.ui.theme.NewFontFamily
 import com.omp48531.sparchive.viewmodel.NotesViewModel
+
+import androidx.compose.ui.graphics.Brush
+
 
 @Composable
 fun NoteListScreen(
@@ -46,20 +54,19 @@ fun NoteListScreen(
                     titleContentColor = Color.White
                 ),
                 title = { Text(
-                text = "Sparchive",
+                text = "SPARCHIVE",
                     color = Color.Black,
                     fontSize =40.sp,
                     fontWeight = FontWeight.ExtraBold,
-                    style = TextStyle(shadow = Shadow(Color.Yellow, offset = Offset.Zero, blurRadius = 9.0F) )
+//                    style = TextStyle(shadow = Shadow(Color.Yellow, offset = Offset.Zero, blurRadius = 9.0F) )
                     ) }
             ,
             actions = {
-                Button(onClick = {},
-                    Modifier.background(color = Color.Transparent)
-                    , colors = ButtonColors(Color.Transparent, contentColor = Color.Gray, disabledContentColor =Color.Transparent, disabledContainerColor = Color.Red )
-                ) {
-                    Text(text = "🔎", fontSize = 30.sp)
+                IconButton(
+                    onClick = {}
 
+                ) {
+                    Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
                 }
             }
                 )
@@ -103,7 +110,8 @@ fun NoteItem(note: com.omp48531.sparchive.data.Note, onClick: () -> Unit) {
                 spotColor = Color.Black
             )
             .height(130.dp)
-            .background(shape = RoundedCornerShape(10.dp), color = Color(230, 230, 230))
+            .background(shape = RoundedCornerShape(10.dp), brush = Brush.linearGradient(colors = listOf(
+                Color.LightGray, Color.Green  )))
             .padding(vertical = 20.dp, horizontal = 20.dp)
 
 
@@ -111,7 +119,8 @@ fun NoteItem(note: com.omp48531.sparchive.data.Note, onClick: () -> Unit) {
         Column {
             Text(text = note.title,
                 fontSize = 25.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                fontFamily = NewFontFamily
                 )
             Text(text ="${note.pages} Pages", maxLines = 1 )
             Text(text ="${note.memberCount} Members", maxLines = 1 )
